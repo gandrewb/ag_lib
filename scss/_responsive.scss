@@ -1,3 +1,6 @@
+// •••••••••• VIEWPORTS ••••••••••
+
+
 /*
 $m-start: 550px;
 $l-start: 850px;
@@ -91,30 +94,59 @@ $breakpoints: (
 }
 
 @function remove-nth($list, $index) {
-  $result: null;
-        
-  @if type-of($index) != number {
-    @warn "$index: #{quote($index)} is not a number for `remove-nth`.";
-  }
-
-  @else if $index == 0 {
-    @warn "List index 0 must be a non-zero integer for `remove-nth`.";
-  }
-
-  @else if abs($index) > length($list) {
-    @warn "List index is #{$index} but list is only #{length($list)} item long for `remove-nth`.";
-  }
-
-  @else {
-    $result: ();
-    $index: if($index < 0, length($list) + $index + 1, $index);  
-
-    @for $i from 1 through length($list) {
-      @if $i != $index {
-        $result: append($result, nth($list, $i));
-      }
-    }
-  }
+	$result: (); 
+	
+	@for $i from 1 through length($list) {
+	  @if $i != $index {
+	    $result: append($result, nth($list, $i));
+	  }
+	}
         
   @return $result;
+}
+
+
+// •••••••••• IMAGES ••••••••••
+
+
+//all image maps need to be merged with $image_map
+$image_map: ();
+
+@mixin retina(){
+	@media print,
+	only screen and (-webkit-min-device-pixel-ratio: 2),
+	only screen and (   min--moz-device-pixel-ratio: 2),
+	only screen and (     -o-min-device-pixel-ratio: 2),
+	only screen and (        min-device-pixel-ratio: 2),
+	only screen and (           min-resolution: 190dpi),
+	only screen and (            min-resolution: 2dppx){
+		@content;
+	}
+}
+
+@mixin image($img_name, $scale:false, $max:false){
+	@each $key in map-keys($breakpoints){
+		@include viewport($key){
+			
+			$img: map-get($image_map, $key);
+			
+			background-image: map-get($img, 'img');
+			
+			@if($scale == true){
+				width: 100%;
+				height: auto;
+				padding-bottom: (map-get($img, 'w') / map-get($img, 'w')) + '%';
+				if($max != false){ max-width: $max; }
+			}@else{
+				width: map-get($img, 'w');
+				height: map-get($img, 'h');
+			}
+			
+			@if(map-has-key($img, '2x')){
+				@include retina(){
+					background-image: map-get($img, '2x');
+				}
+			}
+		}
+	}
 }
