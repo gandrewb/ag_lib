@@ -130,6 +130,8 @@ $image_map: ();
 			
 			$img: map-get($image_map, $key);
 			
+			@warn ($img);
+			
 			background-image: map-get($img, 'img');
 			
 			@if($scale == true){
