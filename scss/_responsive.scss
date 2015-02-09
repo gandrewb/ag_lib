@@ -128,27 +128,39 @@ $image_map: ();
 	@each $key in map-keys($breakpoints){
 		@include viewport($key){
 			
-			$img: map-get($image_map, $key);
+			$img: map-get(map-get($image_map, $img_name), $key);
+			$h_ratio: map-get($img, 'h') / map-get($img, 'w');
 			
-			@warn ($img);
+			position: relative;
 			
-			background-image: map-get($img, 'img');
+			&::before{
+				display: block;
+				content: '';
+				width: 100%;
+				padding-bottom: percentage($h_ratio);
+				background-image: url(map-get($img, 'img'));
+				background-size: contain;
+				background-repeat: no-repeat;
+				@if(map-has-key($img, 'retina')){
+					@include retina(){
+						background-image: url(map-get($img, 'retina'));
+					}
+				}
+			}
 			
 			@if($scale == true){
 				width: 100%;
-				height: auto;
-				padding-bottom: (map-get($img, 'w') / map-get($img, 'w')) + '%';
-				if($max != false){ max-width: $max; }
+				@if($max != false){ max-width: $max;}
 			}@else{
 				width: map-get($img, 'w');
-				height: map-get($img, 'h');
-			}
-			
-			@if(map-has-key($img, '2x')){
-				@include retina(){
-					background-image: map-get($img, '2x');
-				}
 			}
 		}
+	}
+}
+
+@mixin side_border_chop($max){
+	@media screen and (max-width: $max){
+		border-left-width: 0;
+		border-right-width: 0;
 	}
 }
