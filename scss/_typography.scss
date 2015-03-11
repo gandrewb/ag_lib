@@ -23,7 +23,7 @@ html{
 
 $typography-sets: ();
 
-@mixin type($set){
+@mixin type($active-set){
 	$set: map-get($typography-sets, $active-set);
 	
 	$lg: map-get($set, 'large');
