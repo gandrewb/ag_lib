@@ -30,7 +30,7 @@ $typography-sets:();
 	//$md: map-get($set, 'medium');
 	//$sm: map-get($set, 'small');
 	
-	$lg: map-get-z($typography-sets, $set, 'large', 1);
+	$lg: map-get-z($typography-sets, $set, 'large');
 	@warn $lg;
 	
 /*
