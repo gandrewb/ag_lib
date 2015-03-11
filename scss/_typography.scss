@@ -26,29 +26,29 @@ $typography-sets: ();
 @mixin type($active-set){
 	$set: map-get($typography-sets, $active-set);
 	
-	$lg: map-get($set, 'large');
-	$md: map-get($set, 'medium');
-	$sm: map-get($set, 'small');
+	$lg: map-get($set, large);
+	$md: map-get($set, medium);
+	$sm: map-get($set, small);
 	
-	font-size:   map-get($lg, 1);
-	font-weight: map-get($lg, 2);
-	line-height: map-get($lg, 3);
-	font-family: map-get($lg, 4);
+	font-size:   nth($lg, 1);
+	font-weight: nth($lg, 2);
+	line-height: nth($lg, 3);
+	font-family: nth($lg, 4);
 	
-	if($md){
+	@if($md){
 		@include viewport(m,s){
-			font-size:   map-get($md, 1);
-			font-weight: map-get($md, 2);
-			line-height: map-get($md, 3);
-			font-family: map-get($md, 4);
+			font-size:   nth($md, 1);
+			font-weight: nth($md, 2);
+			line-height: nth($md, 3);
+			font-family: nth($md, 4);
 		}
 	}
-	if($sm){
+	@if($sm){
 		@include viewport(s){
-			font-size:   map-get($sm, 1);
-			font-weight: map-get($sm, 2);
-			line-height: map-get($sm, 3);
-			font-family: map-get($sm, 4);
+			font-size:   nth($sm, 1);
+			font-weight: nth($sm, 2);
+			line-height: nth($sm, 3);
+			font-family: nth($sm, 4);
 		}
 	}
 };
