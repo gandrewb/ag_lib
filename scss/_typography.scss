@@ -3,13 +3,13 @@ CREATE YOUR OWN TYPE SETS LIKE SO:
 
 $your-type-set:(
 	main-head: (
-		large:   (3.2rem, 'normal', 1.2, 'Helvetica, Arial'),
-		medium:  (2.8rem, 'normal', 1.2, 'Helvetica, Arial'),
-		small:   (2.1rem, 'normal', 1.4, 'Times, serif')
+		'large':   (3.2rem, 'normal', 1.2, 'Helvetica, Arial'),
+		'medium':  (2.8rem, 'normal', 1.2, 'Helvetica, Arial'),
+		'small':   (2.1rem, 'normal', 1.4, 'Times, serif')
 	),
 );
 
-map_merge($typography-sets, $your-type-set);
+$typography-sets: map_merge($typography-sets, $your-type-set);
 
 */
 
@@ -24,31 +24,33 @@ html{
 $typography-sets:();
 
 @mixin type($active-set){
-	$set: map_get($typography-sets, $active-set);
+	$set: map-get($typography-sets, $active-set);
+	@warn $active-set;
+	@warn $set;
 	
-	$lg: map_get($set, 'large');
-	$md: map_get($set, 'medium');
-	$sm: map_get($set, 'small');
+	$lg: map-get($set, 'large');
+	$md: map-get($set, 'medium');
+	$sm: map-get($set, 'small');
 	
-	font-size:   map_get($lg, 1);
-	font-weight: map_get($lg, 2);
-	line-height: map_get($lg, 3);
-	font-family: map_get($lg, 4);
+	font-size:   map-get($lg, 1);
+	font-weight: map-get($lg, 2);
+	line-height: map-get($lg, 3);
+	font-family: map-get($lg, 4);
 	
 	if($md){
 		@include viewport(m,s){
-			font-size:   map_get($md, 1);
-			font-weight: map_get($md, 2);
-			line-height: map_get($md, 3);
-			font-family: map_get($md, 4);
+			font-size:   map-get($md, 1);
+			font-weight: map-get($md, 2);
+			line-height: map-get($md, 3);
+			font-family: map-get($md, 4);
 		}
 	}
 	if($sm){
 		@include viewport(s){
-			font-size:   map_get($sm, 1);
-			font-weight: map_get($sm, 2);
-			line-height: map_get($sm, 3);
-			font-family: map_get($sm, 4);
+			font-size:   map-get($sm, 1);
+			font-weight: map-get($sm, 2);
+			line-height: map-get($sm, 3);
+			font-family: map-get($sm, 4);
 		}
 	}
 	
