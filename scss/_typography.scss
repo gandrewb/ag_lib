@@ -25,8 +25,8 @@ $typography-sets:();
 
 @mixin type($active-set){
 	$set: map-get($typography-sets, $active-set);
-	@warn $active-set;
-	@warn $set;
+	warn($active-set);
+	warn($set);
 	
 	$lg: map-get($set, 'large');
 	$md: map-get($set, 'medium');
