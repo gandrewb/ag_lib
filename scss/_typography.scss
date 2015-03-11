@@ -21,19 +21,15 @@ html{
 
 // •••••••••• THE SASS MAGIC
 
-$typography-sets:();
+$typography-sets: ();
 
 @mixin type($set){
-	//$set: map-get($typography-sets, $active-set);
+	$set: map-get($typography-sets, $active-set);
 	
-	//$lg: map-get($set, 'large');
-	//$md: map-get($set, 'medium');
-	//$sm: map-get($set, 'small');
+	$lg: map-get($set, 'large');
+	$md: map-get($set, 'medium');
+	$sm: map-get($set, 'small');
 	
-	$lg: map-get-z($typography-sets, $set, 'large', 'size');
-	@warn $lg;
-	
-/*
 	font-size:   map-get($lg, 1);
 	font-weight: map-get($lg, 2);
 	line-height: map-get($lg, 3);
@@ -55,6 +51,4 @@ $typography-sets:();
 			font-family: map-get($sm, 4);
 		}
 	}
-*/
-	
 };
