@@ -28,12 +28,16 @@
 		}
 		ajx.open(a.type, a.url+params, true);
 		ajx.send();
-	};	
+	};
 	
-/* ! •••••••••• PARALLAX •••••••••• */
-	console.log('Occasionally the additional height of the image itself (600px) is not added into the calculation — the distance property perhaps? I think there must be some kind of race condition going on there. Multiple transforms that end early do not persist.');
+// ! •••••••••• URL VARIABLES ••••••••••
+	this.url_vars = function(){
+		return window.location.pathname.split('/');
+	};
 	
+/* ! •••••••••• PARALLAX •••••••••• */		
 	this.parallax = function(el, props){
+		console.log('Occasionally the additional height of the image itself (600px) is not added into the calculation — the distance property perhaps? I think there must be some kind of race condition going on there. Multiple transforms that end early do not persist.');		
 		prlx.calc();
 		prlx.parallaxes.push(new Changeling(el, props));
 		prlx.setPrefix();
