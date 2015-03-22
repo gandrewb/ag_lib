@@ -39,8 +39,9 @@
 			vars: {}
 		};
 		var get_vars = window.location.href.split('?')[1].split('&');
-		for(i in vars){
-			result.vars[i] = get_vars[i]
+		for(i in get_vars){
+			var kv = get_vars.split('=');
+			result.vars[kv[0]] = kv[1];
 		}
 		
 		return result;
