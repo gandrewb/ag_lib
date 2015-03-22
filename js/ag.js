@@ -34,15 +34,21 @@
 	this.url_vars = function(){
 		var result = {
 			hosts: window.location.host.split('.'),
-			path: window.location.pathname.split('/'),
+			path: [],
 			protocol: window.location.protocol,
 			vars: {}
 		};
+		
+		var path = window.location.pathname;
+		if (path.length>1){
+			result.path = path.substr(1).split('/');
+		}
+		
 		var get_vars = window.location.href.split('?');
 		if(get_vars.length>1){
 			get_vars = get_vars[1].split('&');
 			for(i in get_vars){
-				var kv = get_vars.split('=');
+				var kv = get_vars[i].split('=');
 				result.vars[kv[0]] = kv[1];
 			}
 		}
