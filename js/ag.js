@@ -32,7 +32,18 @@
 	
 // ! •••••••••• URL VARIABLES ••••••••••
 	this.url_vars = function(){
-		return window.location.pathname.split('/');
+		var result = {
+			hosts: window.location.host.split('.'),
+			path: window.location.pathname.split('/'),
+			protocol: window.location.protocol,
+			vars: {}
+		};
+		var get_vars = window.location.href.split('?')[1].split('&');
+		for(i in vars){
+			result.vars[i] = get_vars[i]
+		}
+		
+		return result;
 	};
 	
 /* ! •••••••••• PARALLAX •••••••••• */		
