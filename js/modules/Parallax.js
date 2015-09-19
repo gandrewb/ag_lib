@@ -1,62 +1,11 @@
-(function(){
-	window.AG = this;
-	
-	this.version = '0.0.1';
+'use strict';
 
-/* ! •••••••••• AJAX •••••••••• */
-	this.ajax = function(a){ //data, url, type, done		
-		var ajx, response, params='';
-		
-		if(a.data!='undefined'){
-			var ct=0;
-			for(idx in a.data){
-				ct++;
-				var cha = (ct==1) ? '?': '&';
-				params+= cha+idx+'='+a.data[idx];
-			}
-		}
-		
-		if(window.XMLHttpRequest){
-			ajx = new XMLHttpRequest();
-		}else{
-			ajx = new ActiveXObject("Microsoft.XMLHTTP");
-		}
-		ajx.onreadystatechange = function() {
-			if(ajx.readyState==4 && ajx.status==200){
-				a.done(ajx.responseText);
-			}
-		}
-		ajx.open(a.type, a.url+params, true);
-		ajx.send();
-	};
+var Parallax = function(){
 	
-// ! •••••••••• URL VARIABLES ••••••••••
-	this.url_vars = function(){
-		var result = {
-			hosts: window.location.host.split('.'),
-			path: [],
-			protocol: window.location.protocol,
-			vars: {}
-		};
-		
-		var path = window.location.pathname;
-		if (path.length>1){
-			result.path = path.substr(1).split('/');
-		}
-		
-		var get_vars = window.location.href.split('?');
-		if(get_vars.length>1){
-			get_vars = get_vars[1].split('&');
-			for(i in get_vars){
-				var kv = get_vars[i].split('=');
-				result.vars[kv[0]] = kv[1];
-			}
-		}
-		
-		return result;
-	};
 	
-/* ! •••••••••• PARALLAX •••••••••• */		
+	//I don't expect any of this will work in its current state. Needs to be refactored to work as module
+	
+	
 	this.parallax = function(el, props){
 		console.log('Occasionally the additional height of the image itself (600px) is not added into the calculation — the distance property perhaps? I think there must be some kind of race condition going on there. Multiple transforms that end early do not persist.');		
 		prlx.calc();
@@ -174,5 +123,10 @@
 	window.addEventListener('resize', function(){
 		prlx.calc();
 	});
+	
+	
+	
+	
+};
 
-})();
+module.exports = Parallax;
