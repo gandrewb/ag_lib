@@ -22,6 +22,8 @@ var Url = function(){
 			this.info.vars[kv[0]] = kv[1];
 		}
 	}
+	
+	return this.info;
 };
 
 module.exports = Url;
