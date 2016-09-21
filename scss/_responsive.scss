@@ -124,12 +124,27 @@ $image_map: ();
 	}
 }
 
+@function img_at_viewport($img_name, $viewport){
+	$image: map-get($image_map, $img_name);
+	@return map-get($image, $viewport);
+}
+
+@function img_width_at($img_name, $viewport){
+	@return map-get( image_at_viewport($img_name, $viewport), 'w' );
+}
+
+@function img_height_at($img_name, $viewport){
+	@return map-get( image_at_viewport($img_name, $viewport), 'h' );
+}
+
+// $scale: if it should scale with the parent width
+// $max:   a max width unit
 @mixin image($img_name, $scale:false, $max:false){
 	@each $key in map-keys($breakpoints){
 		@include viewport($key){
 			
-			$img: map-get(map-get($image_map, $img_name), $key);
-			$h_ratio: map-get($img, 'h') / map-get($img, 'w');
+			$img: image_at_viewport($img_name, $key);
+			$h_ratio: image_height_at($img_name, $key) / image_width_at($img_name, $key);
 			
 			position: relative;
 			
@@ -152,7 +167,7 @@ $image_map: ();
 				width: 100%;
 				@if($max != false){ max-width: $max;}
 			}@else{
-				width: map-get($img, 'w');
+				width: image_width_at($img_name, $key);
 			}
 		}
 	}

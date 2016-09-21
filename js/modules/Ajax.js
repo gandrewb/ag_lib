@@ -3,9 +3,9 @@
 var Ajax = function(options){
 	var ajx, response, params='';
 	
-	if(options.data!='undefined'){
+	if(options.data!==undefined){
 		var ct=0;
-		for(idx in options.data){
+		for(var idx in options.data){
 			ct++;
 			var cha = (ct==1) ? '?': '&';
 			params+= cha+idx+'='+options.data[idx];
