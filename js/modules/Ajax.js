@@ -1,6 +1,6 @@
 'use strict';
 
-var Ajax = function(options){
+var Ajax = function(options){ //data, url, type, done
 	var ajx, response, params='';
 	
 	if(options.data!==undefined){
