@@ -18,7 +18,9 @@ proto.createElement = function(options) { // type, attributes, textnode
 		var text = document.createTextNode(options.textnode);
 		el.appendChild(text);
 	}
-}
+	
+	return el;
+};
 
 
 module.exports = Dom;
