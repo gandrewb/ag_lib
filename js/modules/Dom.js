@@ -5,11 +5,18 @@ var Dom = function(){};
 var proto = Dom.prototype;
 
 
-proto.createElement = function(element, attributes) { // {"attr": "value", "attr2": "value2"}
-	var el = document.createElement(element);
+proto.createElement = function(options) { // type, attributes, textnode
+	var el = document.createElement(options.type);
 	
-	for(var attr in attributes) {
-		el.setAttribute(attr, attributes[attr]);
+	if (options.attributes !== undefined) {
+		for(var attr in options.attributes) {
+			el.setAttribute(attr, attributes[attr]);
+		}
+	}
+	
+	if (options.textnode !== undefined) {
+		var text = document.createTextNode(options.textnode);
+		el.appendChild(text);
 	}
 }
 
