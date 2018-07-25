@@ -10,7 +10,7 @@ proto.createElement = function(options) { // type, attributes, textnode
 	
 	if (options.attributes !== undefined) {
 		for(var attr in options.attributes) {
-			el.setAttribute(attr, attributes[attr]);
+			el.setAttribute(attr, options.attributes[attr]);
 		}
 	}
 	
